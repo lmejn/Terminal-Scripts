@@ -22,4 +22,4 @@ function glols {git "log" "--oneline" "--decorate" "--graph" "--stat" }
 
 Import-Module posh-git
 Import-Module oh-my-posh
-Set-Theme SimplePrompt
+Set-Theme Flare
