@@ -1,0 +1,16 @@
+[character]
+success_symbol = "[>](bold green)"
+error_symbol = "[x](bold red)"
+
+[conda]
+ignore_base = false
+
+[python]
+symbol = "🅟"
+
+[sudo]
+disabled = false
+symbol = "🅢 "
+
+[git_branch]
+symbol = ""
