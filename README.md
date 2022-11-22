@@ -1,6 +1,11 @@
-# Prompts
+# Scripts and Prompts
 
-A small collection of my prompts for various terminals.
+A small collection of scripts and prompts for various terminals.
+
+## Scripts
+
+1. Copy the contents of `scripts/` onto your device (*e.g. `~/.scripts`)
+2. Add to `$PATH`
 
 ## ZSH
 
