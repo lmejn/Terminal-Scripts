@@ -1,0 +1,53 @@
+#!/usr/bin/env python3
+"""
+  Copy modified files in a git repository into a new directory or as a tar/zip.
+  
+The script is intended to be used to easily transfer files between devices, without committing to the git repository.
+This may be useful for transferring unfinished changes between servers.
+
+usage: get-modified [-h] path_to_repository output_path
+
+positional arguments:
+  path_to_repository
+  output_path
+
+optional arguments:
+  -h, --help          show this help message and exit
+"""
+
+import os, argparse, subprocess
+
+def modified_filename(line):
+    return line.strip().split()[-1]
+
+if __name__=="__main__":
+
+    # Parse Arguments
+    parser = argparse.ArgumentParser()
+    parser.add_argument('path_to_repository', type=str)
+    parser.add_argument('output_path', type=str)
+
+    args = parser.parse_args()
+
+    # Find Modified files
+    git_command = "git status --short"
+
+    result = subprocess.check_output(f"{git_command} {args.path_to_repository}".split())
+    result = result.decode("utf-8").split("\n")[:-1]
+
+    # Extract file paths from git output
+    files = " ".join(map(modified_filename, result))
+
+    # Select the correct command depending on output path extension
+    _, ext = os.path.splitext(args.output_path)
+    if "tar" in ext:
+        command = f"tar -cavf {args.output_path} {files}"
+    elif "zip" == ext:
+        command = f"zip {args.output_path} {files}"
+    elif ext == "":
+        os.makedirs(args.output_path)
+        command = f"cp --parents {files} {args.output_path}"
+    else:
+        raise NotImplementedError(f"{ext} files not implemented.")
+
+    subprocess.call(command.split())
