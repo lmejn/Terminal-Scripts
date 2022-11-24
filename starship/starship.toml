@@ -14,3 +14,11 @@ symbol = "🅢 "
 
 [git_branch]
 symbol = ""
+
+[shell]
+# I tend to use fish or powershell, hence I only want the shell to show up when I'm not using either of those (e.g. bash)
+disabled=false
+fish_indicator = ""
+bash_indicator = "bash "
+powershell_indicator = ""
+format="[$indicator]($style)" # Removed the space after the indicator
