@@ -6,11 +6,11 @@ error_symbol = "[x](bold red)"
 ignore_base = false
 
 [python]
-symbol = "🅟"
+symbol = "🅟 "
 
 [sudo]
 disabled = false
-symbol = "🅢 "
+symbol = "sudo "
 
 [git_branch]
 symbol = ""
@@ -22,3 +22,6 @@ fish_indicator = ""
 bash_indicator = "bash "
 powershell_indicator = ""
 format="[$indicator]($style)" # Removed the space after the indicator
+
+[hostname]
+ssh_symbol = "🔗"
