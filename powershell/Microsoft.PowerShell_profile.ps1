@@ -1,12 +1,15 @@
-
-#region conda initialize
-# !! Contents within this block are managed by 'conda init' !!
-(& $HOME"\.miniconda3\Scripts\conda.exe" "shell.powershell" "hook") | Out-String | Invoke-Expression
-#endregion
+# Environment Variables
+$env:HF_HUB_ENABLE_HF_TRANSFER=1
+$env:HF_HUB_DISABLE_TELEMETRY=1
 
 # Bash Aliases
 Set-Alias which get-command
-Set-Alias edit "C:\Program Files (x86)\Notepad++\notepad++.exe"
+Set-Alias edit "C:\Program Files\Notepad++\notepad++.exe"
+
+# Git
+if (!(Get-Command git -ErrorAction SilentlyContinue)) {
+	function git {wsl.exe git $args}
+}
 
 # Oh My Zsh Git Plugin Aliases
 Set-Alias g git
@@ -20,6 +23,18 @@ function glg {git "log" "--stat" }
 function glog {git "log" "--oneline" "--decorate" "--graph" }
 function glols {git "log" "--oneline" "--decorate" "--graph" "--stat" }
 
+# Posh Git
 Import-Module posh-git
-Import-Module oh-my-posh
-Set-Theme Flare
+
+# Conda
+if(Test-Path $HOME/.miniforge3){
+	$CondaPath = "$HOME\.miniforge3" 
+	(& "$CondaPath\Scripts\conda.exe" "shell.powershell" "hook") | Out-String | Invoke-Expression
+}
+if(Test-Path $HOME/.miniconda3) {
+	$CondaPath = "$HOME\.miniconda3"
+	(& "$CondaPath\Scripts\conda.exe" "shell.powershell" "hook") | Out-String | Invoke-Expression
+}
+
+# Starship Prompt
+Invoke-Expression (&starship init powershell)
