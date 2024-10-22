@@ -18,9 +18,9 @@ symbol = ""
 [shell]
 # I tend to use fish or powershell, hence I only want the shell to show up when I'm not using either of those (e.g. bash)
 disabled=false
-fish_indicator = ""
+fish_indicator = "fish "
 bash_indicator = "bash "
-powershell_indicator = ""
+powershell_indicator = "ps "
 format="[$indicator]($style)" # Removed the space after the indicator
 
 [hostname]
